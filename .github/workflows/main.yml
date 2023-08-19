@@ -18,11 +18,15 @@ jobs:
         with:
           node-version: 14
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test
+      - name: Run tests for each service
+        run: |
+          services=("client" "comments" "event-bus" "moderation" "posts" "query")
+          for service in "${services[@]}"; do
+            cd $service
+            npm install
+            npm test
+            cd ..
+          done
 
       - name: Build and push Docker images
         env:
