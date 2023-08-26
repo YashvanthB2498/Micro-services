@@ -6,8 +6,6 @@ on:
       - main
     paths:
       - 'query/**'
-    paths-ignore:
-      - 'query/**/*'
 
 jobs:
   build_and_test:
