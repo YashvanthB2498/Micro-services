@@ -5,11 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'query/**' # Adjust the path to match your directory structure
-  pull_request:
-    types: [opened, synchronize, reopened]
-    paths:
-      - 'query/**' # Adjust the path to match your directory structure
+      - 'query/**'
 
 jobs:
   build_and_test:
@@ -19,22 +15,22 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 14
-      
-      - name: Navigate to query directory
+
+      - name: Navigate to the query directory
         run: cd query
 
       - name: Install dependencies
         run: npm install
-      
+
       - name: Run tests
         run: npm test
 
-  sonar_analysis:
+sonar_analysis:
     name: SonarCloud Analysis
     runs-on: ubuntu-latest
     needs: build_and_test
@@ -49,7 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  build_and_push_docker:
+build_and_push_docker:
     name: Build and Push Docker image
     runs-on: ubuntu-latest
     needs: sonar_analysis
@@ -70,3 +66,4 @@ jobs:
           context: .
           push: true
           tags: yashvanth24/micro-services:query-latest
+        
