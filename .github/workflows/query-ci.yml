@@ -50,6 +50,7 @@ jobs:
 
       - name: Navigate to the query directory
         run: cd query
+        working-directory: ./query
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
