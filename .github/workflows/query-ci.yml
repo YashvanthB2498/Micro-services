@@ -6,6 +6,8 @@ on:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+    paths:
+      - 'query/**'
 
 jobs:
   build_and_test:
@@ -24,19 +26,11 @@ jobs:
       - name: Navigate to the query directory
         run: cd query
 
-      - name: Print Working Directory
-        run: pwd
-
-      - name: List Directory Contents
-        run: ls -la ./query
-
       - name: Install dependencies
         run: npm install
-        working-directory: ./query
 
       - name: Run tests
         run: npm test
-        working-directory: ./query
 
   sonar_analysis:
     name: SonarCloud Analysis
@@ -47,24 +41,20 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
 
+      - name: Configure Java JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
       - name: Navigate to the query directory
         run: cd query
-
-      - name: Print Working Directory
-        run: pwd
-
-      - name: List Directory Contents
-        run: ls -la ./query
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:  
-          working-directory: ${{ github.workspace }}/query
-          args: -X # This line specifies the working directory for the SonarCloud action
-
 
   build_and_push_docker:
     name: Build and Push Docker image
@@ -75,8 +65,8 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
 
-      - name: Navigate to the query directory
-        run: cd query
+      - name: Configure Docker CLI
+        uses: docker/setup-buildx-action@v1
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
