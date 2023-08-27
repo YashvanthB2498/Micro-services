@@ -20,7 +20,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
-
         
       - name: Print Working Directory
         run: pwd
@@ -30,6 +29,12 @@ jobs:
 
       - name: Navigate to the query directory
         run: cd query
+
+      - name: Print Working Directory
+        run: pwd
+
+      - name: List Directory Contents
+        run: ls -la
 
       - name: Install dependencies
         run: npm install
