@@ -23,7 +23,7 @@ jobs:
 
       - name: Navigate to the query directory
         run: cd query
-        
+
       - name: Print Working Directory
         run: pwd
 
@@ -38,7 +38,6 @@ jobs:
         run: npm test
         working-directory: ./query
 
-
   sonar_analysis:
     name: SonarCloud Analysis
     runs-on: ubuntu-latest
@@ -50,7 +49,6 @@ jobs:
 
       - name: Navigate to the query directory
         run: cd query
-        #working-directory: ./query
 
       - name: Print Working Directory
         run: pwd
@@ -63,6 +61,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          working-directory: ./query
 
   build_and_push_docker:
     name: Build and Push Docker image
