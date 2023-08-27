@@ -62,7 +62,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:  
-          working-directory: ./query  # This line specifies the working directory for the SonarCloud action
+          working-directory: ${{ github.workspace }}/query
+          args: -X # This line specifies the working directory for the SonarCloud action
 
 
   build_and_push_docker:
