@@ -52,6 +52,12 @@ jobs:
         run: cd query
         #working-directory: ./query
 
+      - name: Print Working Directory
+        run: pwd
+
+      - name: List Directory Contents
+        run: ls -la ./query
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
