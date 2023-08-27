@@ -23,6 +23,7 @@ jobs:
 
       - name: Navigate to the query directory
         run: cd query
+        working-directory: ./query
 
       - name: Print Working Directory
         run: pwd
