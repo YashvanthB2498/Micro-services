@@ -14,8 +14,6 @@ jobs:
 
     steps:
     
-      - name: Navigate to the query directory
-        run: cd query
       - name: Check out the repo
         uses: actions/checkout@v2
 
