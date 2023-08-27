@@ -38,8 +38,7 @@ jobs:
         run: npm test
         working-directory: ./query
 
-  sonar_analysis:
-  name: SonarCloud Analysis
+name: SonarCloud Analysis
   runs-on: ubuntu-latest
   needs: build_and_test
 
