@@ -21,14 +21,15 @@ jobs:
         with:
           node-version: 14
 
-      - name: Navigate to the query directory
-        run: cd query
         
       - name: Print Working Directory
         run: pwd
 
       - name: List Directory Contents
         run: ls -la
+
+      - name: Navigate to the query directory
+        run: cd query
 
       - name: Install dependencies
         run: npm install
